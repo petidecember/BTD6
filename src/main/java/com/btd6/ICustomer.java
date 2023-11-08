@@ -1,3 +1,5 @@
+package com.btd6;
+
 import java.util.UUID;
 
 public interface ICustomer {

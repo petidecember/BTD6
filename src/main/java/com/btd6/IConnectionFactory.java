@@ -1,4 +1,4 @@
-package dev.hv.db.init;
+package com.btd6;
 
 public interface IConnectionFactory {
 	

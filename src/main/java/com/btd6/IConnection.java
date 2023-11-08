@@ -1,3 +1,5 @@
+package com.btd6;
+
 public interface IConnection {
 	
 	IConnection openConnection(String url, String user, String password);

@@ -1,11 +1,19 @@
 package com.btd6;
 
+import java.beans.ConstructorProperties;
 import java.util.UUID;
 
 public class Customer implements ICustomer {
     private UUID uuid;
     private String firstname;
     private String lastname;
+
+    @ConstructorProperties({"uuid", "firstname", "lastname"})
+    public Customer(UUID uuid, String firstname, String lastname) {
+        setUuid(uuid);
+        setFirstname(firstname);
+        setLastname(lastname);
+    }
 
     public Customer(String firstname, String lastname) {
         setUuid(UUID.randomUUID());
@@ -20,7 +28,7 @@ public class Customer implements ICustomer {
 
     @Override
     public void setFirstname(String firstName) {
-        this.firstname = firstname;
+        this.firstname = firstName;
     }
 
     @Override

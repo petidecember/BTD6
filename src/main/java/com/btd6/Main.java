@@ -11,7 +11,7 @@ public class Main {
         System.out.println("connecting");
 
         jdbi.useHandle(handle -> {
-            //TODO: delete this and write tests
+            //TODO: delete this and write tests for it
             ICustomerDAO customer = jdbi.onDemand(ICustomerDAO.class);
             customer.removeTable();
             customer.createTable();

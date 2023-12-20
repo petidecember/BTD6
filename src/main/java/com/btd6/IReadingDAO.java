@@ -1,12 +1,11 @@
 package com.btd6;
 
-import java.util.List;
-import java.util.UUID;
-
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
+
+import java.util.List;
 
 public interface IReadingDAO extends IDAO<Reading>{
     @Override
@@ -25,7 +24,7 @@ public interface IReadingDAO extends IDAO<Reading>{
     void createTable();
 
     @Override
-    @SqlUpdate("DROP TABLE readings;")
+    @SqlUpdate("DROP TABLE readings")
     void removeTable();
 
     @Override
@@ -35,7 +34,7 @@ public interface IReadingDAO extends IDAO<Reading>{
     @Override
     @SqlQuery("SELECT * FROM readings WHERE UUID = :id")
     @RegisterConstructorMapper(Reading.class)
-    Reading findById(UUID id);
+    Reading findById(String id);
 
     @Override
     @SqlQuery("SELECT * FROM readings")
@@ -48,7 +47,7 @@ public interface IReadingDAO extends IDAO<Reading>{
 
     @Override
     @SqlUpdate("DELETE FROM readings WHERE UUID = :uuid")
-    boolean delete(UUID uuid);
+    boolean delete(String uuid);
 
     @Override
     @SqlUpdate("TRUNCATE TABLE readings")

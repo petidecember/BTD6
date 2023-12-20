@@ -4,7 +4,9 @@ import java.beans.ConstructorProperties;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.UUID;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode
 public class Reading implements IReading {
     private UUID uuid;
     private String comment;
@@ -15,7 +17,7 @@ public class Reading implements IReading {
     private boolean substitute;
 
     @ConstructorProperties ({"uuid", "comment", "customer", "dateofreading", "metercount", "meterid", "substitute"})
-    public Reading (UUID uuid, String comment, ICustomer customer, Date dateofreading, double metercount, String meterid, boolean substitute) {
+    public Reading(UUID uuid, String comment, ICustomer customer, Date dateofreading, double metercount, String meterid, boolean substitute) {
         setUuid(uuid);
         setComment(comment);
         setCustomer(customer);
@@ -25,7 +27,7 @@ public class Reading implements IReading {
         setSubstitute(substitute);
     }
 
-    public Reading (String comment, ICustomer customer, LocalDate dateofreading, double metercount, String meterid, boolean substitute) {
+    public Reading(String comment, ICustomer customer, LocalDate dateofreading, double metercount, String meterid, boolean substitute) {
         setUuid(UUID.randomUUID());
         setComment(comment);
         setCustomer(customer);
@@ -75,7 +77,7 @@ public class Reading implements IReading {
         this.dateofreading = dateofreading;
     }
 
-    @Override 
+    @Override
     public Double getMetercount() {
         return metercount;
     }

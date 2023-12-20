@@ -1,30 +1,29 @@
 package com.btd6;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface IDAO<T> {
-	
+
    void createTable();
-	
+
    void removeTable();
 
    // CREATE
    boolean insert(T o);
 
    // READ
-   T findById(UUID id);
-   
+   T findById(String uuid);
+
    // READ
    List<? extends T> getAll();
-   
+
    // UPDATE
    boolean update(T o);
-   
-  
+
+
    // DELETE
-   boolean delete(UUID uuid);
-   
+   boolean delete(String uuid);
+
    // DELETE ALL
    void truncate();
 }

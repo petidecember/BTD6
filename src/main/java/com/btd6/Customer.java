@@ -1,8 +1,11 @@
 package com.btd6;
 
+import lombok.EqualsAndHashCode;
+
 import java.beans.ConstructorProperties;
 import java.util.UUID;
 
+@EqualsAndHashCode
 public class Customer implements ICustomer {
     private UUID uuid;
     private String firstname;

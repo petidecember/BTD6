@@ -42,7 +42,7 @@ public class CustomerDAOTest {
     }
 
     @Test
-    void name() {
+    public void name() {
         Customer customer1 = customers.getAll().get(0);
         Customer expected = new Customer("Max", "Mustermann");
         assertEquals(customer1.getFirstname(), expected.getFirstname());
@@ -50,13 +50,13 @@ public class CustomerDAOTest {
     }
 
     @Test
-    void findById() {
+    public void findById() {
         Customer expected = new Customer(UUID.fromString("edb85564-9f0c-4502-9294-c0e86293d1d3"), "Harry", "Potter");
         assertEquals(expected, customers.findById("edb85564-9f0c-4502-9294-c0e86293d1d3"));
     }
 
     @Test
-    void throwExceptionOnSameInsertUUID() {
+    public void throwExceptionOnSameInsertUUID() {
         assertThrows(UnableToExecuteStatementException.class,
                 () -> {
                     customers.insert(new Customer(UUID.fromString("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Max", "Mustermann"));

@@ -1,12 +1,12 @@
 package com.btd6;
 
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
+import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface ICustomerDAO extends IDAO<Customer>{
     @Override
@@ -27,9 +27,9 @@ public interface ICustomerDAO extends IDAO<Customer>{
     boolean insert(@BindBean Customer o);
 
     @Override
-    @SqlQuery("SELECT * FROM customers WHERE UUID = :id")
+    @SqlQuery("SELECT * FROM customers WHERE UUID = :uuid")
     @RegisterConstructorMapper(Customer.class)
-    Customer findById(UUID id);
+    Customer findById(@Bind("uuid") String uuid);
 
     @Override
     @SqlQuery("SELECT * FROM customers")
@@ -42,7 +42,7 @@ public interface ICustomerDAO extends IDAO<Customer>{
 
     @Override
     @SqlUpdate("DELETE FROM customers WHERE UUID = :uuid")
-    boolean delete(UUID uuid);
+    boolean delete(@Bind("uuid") String uuid);
 
     @Override
     @SqlUpdate("TRUNCATE TABLE customers")

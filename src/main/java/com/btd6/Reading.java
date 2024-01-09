@@ -17,11 +17,11 @@ public class Reading implements IReading {
     private boolean substitute;
 
     @ConstructorProperties ({"uuid", "comment", "customer", "dateofreading", "metercount", "meterid", "substitute"})
-    public Reading(UUID uuid, String comment, ICustomer customer, Date dateofreading, double metercount, String meterid, boolean substitute) {
+    public Reading(UUID uuid, String comment, ICustomer customer, LocalDate dateofreading, double metercount, String meterid, boolean substitute) {
         setUuid(uuid);
         setComment(comment);
         setCustomer(customer);
-        setDateOfReading(dateofreading.toLocalDate());
+        setDateOfReading(dateofreading);
         setMeterId(meterid);
         setMetercount(metercount);
         setSubstitute(substitute);

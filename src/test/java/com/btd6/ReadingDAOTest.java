@@ -13,11 +13,16 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ReadingDAOTest {
     final static Jdbi jdbi = Jdbi.create("jdbc:h2:mem:test", "", "");
     IReadingDAO readings;
+    ICustomerDAO customers;
+
     Handle handle;
 
     Customer customer = new Customer(UUID.fromString("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Filip", "Marzec");
@@ -30,6 +35,8 @@ public class ReadingDAOTest {
     @BeforeEach
     public void setup() {
         handle = jdbi.open();
+        customers = handle.attach(ICustomerDAO.class);
+        customers.createTable();
         readings = handle.attach(IReadingDAO.class);
         readings.createTable();
         readings.insert(new Reading(UUID.fromString("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Störrdem", customer, LocalDate.of(1806, 1, 1), 2000.0, "test meterid", false));

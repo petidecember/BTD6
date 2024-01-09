@@ -16,7 +16,7 @@ public interface IReadingDAO extends IDAO<Reading>{
             "DateOfReading DATE," +
             "Metercount DOUBLE," +
             "MeterId VARCHAR(255)," +
-            "Substitute TINYINT(1)," +
+            "Substitute BOOLEAN," +
             "PRIMARY KEY (UUID)," +
             "CONSTRAINT fk_reading_customer FOREIGN KEY (Customer)" +
             "REFERENCES customers (UUID) ON DELETE SET NULL" +
@@ -28,7 +28,7 @@ public interface IReadingDAO extends IDAO<Reading>{
     void removeTable();
 
     @Override
-    @SqlUpdate("INSERT INTO readings (UUID, Comment, Customer, DateOfReading, Metercount, MeterId, Substitute) VALUES (:uuid, :comment, :customer, :dateofreading, :metercount, :meterid, :substitute,)")
+    @SqlUpdate("INSERT INTO readings (UUID, Comment, Customer, DateOfReading, Metercount, MeterId, Substitute) VALUES (:uuid, :comment, :customer, :dateofreading, :metercount, :meterid, :substitute)")
     boolean insert(@BindBean Reading o);
 
     @Override

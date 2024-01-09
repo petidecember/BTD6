@@ -1,23 +1,25 @@
 package com.btd6;
 
+import lombok.EqualsAndHashCode;
+import org.jdbi.v3.core.mapper.Nested;
+
 import java.beans.ConstructorProperties;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.UUID;
-import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode
 public class Reading implements IReading {
     private UUID uuid;
     private String comment;
-    private ICustomer customer;
+    @Nested
+    private Customer customer;
     private LocalDate dateofreading;
     private double metercount;
     private String meterid;
     private boolean substitute;
 
     @ConstructorProperties ({"uuid", "comment", "customer", "dateofreading", "metercount", "meterid", "substitute"})
-    public Reading(UUID uuid, String comment, ICustomer customer, LocalDate dateofreading, double metercount, String meterid, boolean substitute) {
+    public Reading(UUID uuid, String comment, Customer customer, LocalDate dateofreading, double metercount, String meterid, boolean substitute) {
         setUuid(uuid);
         setComment(comment);
         setCustomer(customer);
@@ -27,7 +29,7 @@ public class Reading implements IReading {
         setSubstitute(substitute);
     }
 
-    public Reading(String comment, ICustomer customer, LocalDate dateofreading, double metercount, String meterid, boolean substitute) {
+    public Reading(String comment, Customer customer, LocalDate dateofreading, double metercount, String meterid, boolean substitute) {
         setUuid(UUID.randomUUID());
         setComment(comment);
         setCustomer(customer);
@@ -58,12 +60,12 @@ public class Reading implements IReading {
     }
 
     @Override
-    public ICustomer getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
     @Override
-    public void setCustomer(ICustomer customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 

@@ -13,7 +13,7 @@ public class ReadingFactory {
     }
 
     public void saveReading(Reading reading) throws SQLException {
-        String sql = "INSERT INTO readings (Meterid,Comment) VALUES (?, ?)";
+        String sql = "INSERT INTO readings (MeteriD,Comment) VALUES (?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, reading.getMeterId());

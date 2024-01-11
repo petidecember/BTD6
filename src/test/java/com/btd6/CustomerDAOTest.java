@@ -42,11 +42,19 @@ public class CustomerDAOTest {
     }
 
     @Test
-    public void name() {
-        Customer customer1 = customers.getAll().get(0);
+    public void randomUUIDTest() {
+        Customer expected = new Customer("Larry", "Holster");
+        customers.insert(expected);
+        Customer customer = customers.getAll().stream().filter(expected::equals).findFirst().get();
+        assertEquals(customer.getUuid(), expected.getUuid());
+    }
+
+    @Test
+    public void fieldTest() {
+        Customer customer = customers.getAll().get(0);
         Customer expected = new Customer("Max", "Mustermann");
-        assertEquals(customer1.getFirstname(), expected.getFirstname());
-        assertEquals(customer1.getLastname(), expected.getLastname());
+        assertEquals(customer.getFirstname(), expected.getFirstname());
+        assertEquals(customer.getLastname(), expected.getLastname());
     }
 
     @Test

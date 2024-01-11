@@ -37,6 +37,7 @@ public class ReadingDAOTest {
         handle = jdbi.open();
         customers = handle.attach(ICustomerDAO.class);
         customers.createTable();
+        customers.insert(customer);
         readings = handle.attach(IReadingDAO.class);
         readings.createTable();
         readings.insert(new Reading(UUID.fromString("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Störrdem", customer, LocalDate.of(1806, 1, 1), 2000.0, "test meterid", false));
@@ -49,9 +50,17 @@ public class ReadingDAOTest {
     }
 
     @Test
-    public void meterId() {
-        Reading reading1 = readings.getAll().get(0);
-        assertEquals(reading1.getMeterId(), "test meterid");
+    public void randomUUIDTest() {
+        Reading expected = new Reading("Comment", customer, LocalDate.of(2020, 12, 12), 20.0, "Test meterid", false);
+        readings.insert(expected);
+        Reading reading = readings.getAll().stream().filter(expected::equals).findFirst().get();
+        assertEquals(reading.getUuid(), expected.getUuid());
+    }
+
+    @Test
+    public void fieldTest() {
+        Reading reading = readings.getAll().get(0);
+        assertEquals(reading.getMeterId(), "test meterid");
     }
 
     @Test

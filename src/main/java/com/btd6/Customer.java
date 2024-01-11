@@ -18,8 +18,6 @@ public class Customer implements ICustomer {
         setLastname(lastname);
     }
 
-
-
     public Customer(String firstname, String lastname) {
         setUuid(UUID.randomUUID());
         setFirstname(firstname);

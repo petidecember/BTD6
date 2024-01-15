@@ -13,9 +13,9 @@ public interface IReading{
 
 	String getComment();
 
-	void setCustomer(ICustomer customer);
+	void setCustomer(Customer customer);
 
-	ICustomer getCustomer();
+	Customer getCustomer();
 
 	void setDateOfReading(LocalDate dateOfReading);
 

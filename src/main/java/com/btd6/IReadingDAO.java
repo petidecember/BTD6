@@ -1,6 +1,8 @@
 package com.btd6;
 
+import org.jdbi.v3.sqlobject.config.RegisterArgumentFactory;
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
+import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
@@ -16,7 +18,7 @@ public interface IReadingDAO extends IDAO<Reading>{
             "DateOfReading DATE," +
             "Metercount DOUBLE," +
             "MeterId VARCHAR(255)," +
-            "Substitute TINYINT(1)," +
+            "Substitute BOOLEAN," +
             "PRIMARY KEY (UUID)," +
             "CONSTRAINT fk_reading_customer FOREIGN KEY (Customer)" +
             "REFERENCES customers (UUID) ON DELETE SET NULL" +
@@ -28,26 +30,28 @@ public interface IReadingDAO extends IDAO<Reading>{
     void removeTable();
 
     @Override
-    @SqlUpdate("INSERT INTO readings (UUID, Comment, Customer, DateOfReading, Metercount, MeterId, Substitute) VALUES (:uuid, :comment, :customer, :dateofreading, :metercount, :meterid, :substitute,)")
+    @SqlUpdate("INSERT INTO readings (UUID, Comment, Customer, DateOfReading, Metercount, MeterId, Substitute) VALUES (:uuid, :comment, :customer, :dateOfReading, :metercount, :meterId, :substitute)")
+    @RegisterArgumentFactory(CustomerAsArgumentFactory.class)
     boolean insert(@BindBean Reading o);
 
     @Override
-    @SqlQuery("SELECT * FROM readings WHERE UUID = :id")
+    @SqlQuery("SELECT r.*, c.UUID as c_uuid, c.firstname as c_firstname, c.lastname as c_lastname FROM readings AS r INNER JOIN customers AS c ON Customer = c.UUID WHERE r.UUID = :uuid")
     @RegisterConstructorMapper(Reading.class)
-    Reading findById(String id);
+    Reading findById(@Bind("uuid") String uuid);
 
     @Override
-    @SqlQuery("SELECT * FROM readings")
+    @SqlQuery("SELECT r.*, c.UUID as c_uuid, c.firstname as c_firstname, c.lastname as c_lastname FROM readings AS r INNER JOIN customers AS c ON Customer = c.UUID")
     @RegisterConstructorMapper(Reading.class)
     List<Reading> getAll();
 
     @Override
-    @SqlUpdate("UPDATE readings SET Comment = :comment, Customer = :customer, DateOfReading = :dateofreading, Metercount = :metercount, MeterId = :meterid, Susbtitute = :substitute WHERE UUID = :uuid")
+    @SqlUpdate("UPDATE readings SET Comment = :comment, Customer = :customer, DateOfReading = :dateOfReading, Metercount = :metercount, MeterId = :meterId, Substitute = :substitute WHERE UUID = :uuid")
+    @RegisterArgumentFactory(CustomerAsArgumentFactory.class)
     boolean update(@BindBean Reading o);
 
     @Override
     @SqlUpdate("DELETE FROM readings WHERE UUID = :uuid")
-    boolean delete(String uuid);
+    boolean delete(@Bind("uuid") String uuid);
 
     @Override
     @SqlUpdate("TRUNCATE TABLE readings")

@@ -1,37 +1,38 @@
 package com.btd6;
 
+import lombok.EqualsAndHashCode;
+import org.jdbi.v3.core.mapper.Nested;
+
 import java.beans.ConstructorProperties;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.UUID;
-import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode
 public class Reading implements IReading {
     private UUID uuid;
     private String comment;
-    private ICustomer customer;
-    private LocalDate dateofreading;
+    private Customer customer;
+    private LocalDate dateOfReading;
     private double metercount;
-    private String meterid;
+    private String meterId;
     private boolean substitute;
 
-    @ConstructorProperties ({"uuid", "comment", "customer", "dateofreading", "metercount", "meterid", "substitute"})
-    public Reading(UUID uuid, String comment, ICustomer customer, Date dateofreading, double metercount, String meterid, boolean substitute) {
+    @ConstructorProperties ({"uuid", "comment", "customer", "dateOfReading", "metercount", "meterId", "substitute"})
+    public Reading(UUID uuid, String comment, @Nested("c") Customer customer, LocalDate dateOfReading, double metercount, String meterid, boolean substitute) {
         setUuid(uuid);
         setComment(comment);
         setCustomer(customer);
-        setDateOfReading(dateofreading.toLocalDate());
+        setDateOfReading(dateOfReading);
         setMeterId(meterid);
         setMetercount(metercount);
         setSubstitute(substitute);
     }
 
-    public Reading(String comment, ICustomer customer, LocalDate dateofreading, double metercount, String meterid, boolean substitute) {
+    public Reading(String comment, Customer customer, LocalDate dateOfReading, double metercount, String meterid, boolean substitute) {
         setUuid(UUID.randomUUID());
         setComment(comment);
         setCustomer(customer);
-        setDateOfReading(dateofreading);
+        setDateOfReading(dateOfReading);
         setMeterId(meterid);
         setMetercount(metercount);
         setSubstitute(substitute);
@@ -58,23 +59,23 @@ public class Reading implements IReading {
     }
 
     @Override
-    public ICustomer getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
     @Override
-    public void setCustomer(ICustomer customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
     @Override
     public LocalDate getDateOfReading() {
-        return dateofreading;
+        return dateOfReading;
     }
 
     @Override
     public void setDateOfReading(LocalDate dateofreading) {
-        this.dateofreading = dateofreading;
+        this.dateOfReading = dateofreading;
     }
 
     @Override
@@ -89,12 +90,12 @@ public class Reading implements IReading {
 
     @Override
     public String getMeterId() {
-        return meterid;
+        return meterId;
     }
 
     @Override
     public void setMeterId(String meterid) {
-        this.meterid = meterid;
+        this.meterId = meterid;
     }
 
     @Override

@@ -22,7 +22,6 @@ public class ReadingDAOTest {
     final static Jdbi jdbi = Jdbi.create("jdbc:h2:mem:test", "", "");
     IReadingDAO readings;
     ICustomerDAO customers;
-
     Handle handle;
 
     Customer customer = new Customer(UUID.fromString("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Filip", "Marzec");

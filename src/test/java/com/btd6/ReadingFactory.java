@@ -13,11 +13,11 @@ public class ReadingFactory {
     }
 
     public void saveReading(Reading reading) throws SQLException {
-        String sql = "INSERT INTO readings (MeteriD,Comment) VALUES (?, ?)";
+        String sql = "INSERT INTO readings (Meterid,Comment) VALUES (?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, reading.getMeterId());
-            preparedStatement.setString(2, reading.getComment());
+            preparedStatment.setString(2, reading.getComment());
             preparedStatement.executeUpdate();
         }
     }

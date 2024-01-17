@@ -11,29 +11,28 @@ import java.util.UUID;
 public class Reading implements IReading {
     private UUID uuid;
     private String comment;
-    @Nested
     private Customer customer;
-    private LocalDate dateofreading;
+    private LocalDate dateOfReading;
     private double metercount;
-    private String meterid;
+    private String meterId;
     private boolean substitute;
 
-    @ConstructorProperties ({"uuid", "comment", "customer", "dateofreading", "metercount", "meterid", "substitute"})
-    public Reading(UUID uuid, String comment, Customer customer, LocalDate dateofreading, double metercount, String meterid, boolean substitute) {
+    @ConstructorProperties ({"uuid", "comment", "customer", "dateOfReading", "metercount", "meterId", "substitute"})
+    public Reading(UUID uuid, String comment, @Nested("c") Customer customer, LocalDate dateOfReading, double metercount, String meterid, boolean substitute) {
         setUuid(uuid);
         setComment(comment);
         setCustomer(customer);
-        setDateOfReading(dateofreading);
+        setDateOfReading(dateOfReading);
         setMeterId(meterid);
         setMetercount(metercount);
         setSubstitute(substitute);
     }
 
-    public Reading(String comment, Customer customer, LocalDate dateofreading, double metercount, String meterid, boolean substitute) {
+    public Reading(String comment, Customer customer, LocalDate dateOfReading, double metercount, String meterid, boolean substitute) {
         setUuid(UUID.randomUUID());
         setComment(comment);
         setCustomer(customer);
-        setDateOfReading(dateofreading);
+        setDateOfReading(dateOfReading);
         setMeterId(meterid);
         setMetercount(metercount);
         setSubstitute(substitute);
@@ -71,12 +70,12 @@ public class Reading implements IReading {
 
     @Override
     public LocalDate getDateOfReading() {
-        return dateofreading;
+        return dateOfReading;
     }
 
     @Override
     public void setDateOfReading(LocalDate dateofreading) {
-        this.dateofreading = dateofreading;
+        this.dateOfReading = dateofreading;
     }
 
     @Override
@@ -91,12 +90,12 @@ public class Reading implements IReading {
 
     @Override
     public String getMeterId() {
-        return meterid;
+        return meterId;
     }
 
     @Override
     public void setMeterId(String meterid) {
-        this.meterid = meterid;
+        this.meterId = meterid;
     }
 
     @Override

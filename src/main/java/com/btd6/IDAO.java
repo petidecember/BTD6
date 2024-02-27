@@ -1,6 +1,7 @@
 package com.btd6;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface IDAO<T> {
 
@@ -12,7 +13,7 @@ public interface IDAO<T> {
    boolean insert(T o);
 
    // READ
-   T findById(String uuid);
+   T findById(UUID uuid);
 
    // READ
    List<? extends T> getAll();
@@ -22,7 +23,7 @@ public interface IDAO<T> {
 
 
    // DELETE
-   boolean delete(String uuid);
+   boolean delete(UUID uuid);
 
    // DELETE ALL
    void truncate();

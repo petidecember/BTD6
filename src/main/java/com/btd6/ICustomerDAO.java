@@ -7,6 +7,7 @@ import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface ICustomerDAO extends IDAO<Customer>{
     @Override
@@ -29,7 +30,7 @@ public interface ICustomerDAO extends IDAO<Customer>{
     @Override
     @SqlQuery("SELECT * FROM customers WHERE UUID = :uuid")
     @RegisterConstructorMapper(Customer.class)
-    Customer findById(@Bind("uuid") String uuid);
+    Customer findById(@Bind("uuid") UUID uuid);
 
     @Override
     @SqlQuery("SELECT * FROM customers")
@@ -42,7 +43,7 @@ public interface ICustomerDAO extends IDAO<Customer>{
 
     @Override
     @SqlUpdate("DELETE FROM customers WHERE UUID = :uuid")
-    boolean delete(@Bind("uuid") String uuid);
+    boolean delete(@Bind("uuid") UUID uuid);
 
     @Override
     @SqlUpdate("TRUNCATE TABLE customers")

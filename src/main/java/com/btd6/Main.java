@@ -1,17 +1,13 @@
 package com.btd6;
 
-import org.jdbi.v3.core.Jdbi;
-import org.jdbi.v3.sqlobject.SqlObjectPlugin;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class Main {
-    public static void main(String[] args) {
-        final Jdbi jdbi = Jdbi.create("jdbc:mariadb://localhost:3306/BTD6", "BTD6", "");
-        jdbi.installPlugin(new SqlObjectPlugin());
-        System.out.println("connecting");
-
-        jdbi.useHandle(handle -> {
-            ICustomerDAO customer = jdbi.onDemand(ICustomerDAO.class);
-        });
+    public static void main(String[] args) throws JsonProcessingException {
+        Server server = new Server("http://localhost:8080",
+                new DatabaseConnection().openConnection("jdbc:mariadb://localhost:3306/BTD6", "BTD6", "")
+//                new DatabaseConnection().openConnection("jdbc:h2:mem:test", "", "")
+        );
+        server.startServer();
     }
-
 }

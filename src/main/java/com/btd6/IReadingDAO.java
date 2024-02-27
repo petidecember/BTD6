@@ -8,6 +8,7 @@ import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface IReadingDAO extends IDAO<Reading>{
     @Override
@@ -37,7 +38,7 @@ public interface IReadingDAO extends IDAO<Reading>{
     @Override
     @SqlQuery("SELECT r.*, c.UUID as c_uuid, c.firstname as c_firstname, c.lastname as c_lastname FROM readings AS r INNER JOIN customers AS c ON Customer = c.UUID WHERE r.UUID = :uuid")
     @RegisterConstructorMapper(Reading.class)
-    Reading findById(@Bind("uuid") String uuid);
+    Reading findById(@Bind("uuid") UUID uuid);
 
     @Override
     @SqlQuery("SELECT r.*, c.UUID as c_uuid, c.firstname as c_firstname, c.lastname as c_lastname FROM readings AS r INNER JOIN customers AS c ON Customer = c.UUID")
@@ -51,7 +52,7 @@ public interface IReadingDAO extends IDAO<Reading>{
 
     @Override
     @SqlUpdate("DELETE FROM readings WHERE UUID = :uuid")
-    boolean delete(@Bind("uuid") String uuid);
+    boolean delete(@Bind("uuid") UUID uuid);
 
     @Override
     @SqlUpdate("TRUNCATE TABLE readings")

@@ -66,7 +66,7 @@ public class ReadingDAOTest {
     @Test
     public void findById() {
         Reading expected = new Reading(UUID.fromString("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab"), "Erdem", customer, LocalDate.of(2012, 12, 12), 30.0, "test id", true);
-        assertEquals(expected, readings.findById("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab"));
+        assertEquals(expected, readings.findById(UUID.fromString("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab")));
     }
 
     @Test
@@ -94,8 +94,8 @@ public class ReadingDAOTest {
 
     @Test
     public void delete() {
-        readings.delete("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaac");
-        assertNull(readings.findById("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaac"));
+        readings.delete(UUID.fromString("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaac"));
+        assertNull(readings.findById(UUID.fromString("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaac")));
     }
 
     @Test

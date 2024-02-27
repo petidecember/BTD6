@@ -60,7 +60,7 @@ public class CustomerDAOTest {
     @Test
     public void findById() {
         Customer expected = new Customer(UUID.fromString("edb85564-9f0c-4502-9294-c0e86293d1d3"), "Harry", "Potter");
-        assertEquals(expected, customers.findById("edb85564-9f0c-4502-9294-c0e86293d1d3"));
+        assertEquals(expected, customers.findById(UUID.fromString(("edb85564-9f0c-4502-9294-c0e86293d1d3"))));
     }
 
     @Test
@@ -87,8 +87,8 @@ public class CustomerDAOTest {
 
     @Test
     public void delete() {
-        customers.delete("edb85564-9f0c-4502-9294-c0e86293d1d3");
-        assertNull(customers.findById("edb85564-9f0c-4502-9294-c0e86293d1d3"));
+        customers.delete(UUID.fromString("edb85564-9f0c-4502-9294-c0e86293d1d3"));
+        assertNull(customers.findById(UUID.fromString("edb85564-9f0c-4502-9294-c0e86293d1d3")));
     }
 
     @Test
